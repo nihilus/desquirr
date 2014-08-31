@@ -1,0 +1,130 @@
+Tue Jan 30 11:42:30 WEST 2007
+
+- fixed truncated ida message display output
+- improved expression readability, by writing brackets only when needed according to the operator precendence rules
+- arm decompiler now assumes r0 .. r3 are the parameters.
+- improved handling of arm shift operators
+- arm: now ignoring constant pools embedded in code
+- added support for several missing arm opcodes: ldrpc, addsp, condition codes
+- fixed some nullptr ref bugs
+- added msvc8 project files
+- added gnumake makefile to build with msvc8
+- improved global variable / label naming
+
+Mon Oct 17 13:02:05 WEDT 2005
+
+- fixed arm 'S' handling: changed && to &
+
+Sun Oct 16 08:17:34 WEDT 2005
+
+- made ida 4.9 compatible
+- fixed  bug where push #imm was counted with x86 func prolog.
+- added support for arm:MOVL macro instruction
+- improved EscapeAsciiString
+- added flag to process all functions in a file.
+- made to compile ( but not yet run ) with gcc:
+     * added virtual destructors
+     * split declaration / init of PLUGIN.
+     * added some ifndef GCC around watcom specific stuff.
+- renamed 'Call' to 'CallExpression'
+- renamed 'Global' to 'GlobalVariable' 
+- added dump functions for nodes, instructions, expressions.
+- changed several const char* to std::string
+- added some warnings of unexpected conditions
+- GlobalVariable::GetName now generates name when name not found.
+- added several 'const' modifiers.
+- changed several std::string (byval) params, into const std::string&. (byref)
+
+Fri Jul 23 WEDT 2005
+
+- split off x86 stuff into 'ida-x86.cpp'
+- renamed LowLevelAnalysis to X86Analysis
+- changed deprecated #include <strstream> to #include <sstream>
+- removed 'using namespace std;' directives, .. added 'std::' where needed.
+- added idaapi to the public functions, for ida4.80 compatibility
+- type inconsistancy in 'CreateFrom', GetString, GetName in expression.hpp /
+expression.cpp, changed Addr to ea_t
+- moved *StackVar* function decls to idapro.hpp
+- removed use of strcpy from RegisterName, and ConditionOp
+- use same register numbering scheme as arm processor module
+- use named constants for register index.
+- fixed crash, when isStkVar(flags, 1) and isStkVar(flags, 2) are both true.
+  while only operand==2 is actually the right one.
+- changed snprintf into qsnprintf
+- changed GetStackVariableName to early-exit style
+- more return code checking
+- fixed call to get_ti to be ida4.80 compatible
+- added 'const' and &reference to several BoolArray methods, so it compiles with gcc too.
+- changed constructor initializer order to reflect real init order.
+  in Location()
+- changed 'const char* const RegisterName()' to 'std::string RegisterName() const'
+
+Fri Jul 22 21:20:28 WEDT 2005
+
+- no compiles both for ida470 and ida480
+- MLA now decompiles correctly
+- added several warnings for incorrectly handled cases
+
+TODO:
+- register index is now a mix of int, unsigned short, short.
+- INVALID_ADDR should be of type Addr
+- include stl headers before ida's. ... otherwise strcpy will be redefined and
+  compile fails under gcc.
+
+- a situation like this is not handled properly:
+   l1:
+     push #1
+	 jmp L3
+   l2:
+     push #2
+   l3:
+     call fn
+
+- change (reg<<16)>>16  to typecast: (WORD)reg
+- add code to simplify expressions.
+
+- def/use chains should also view local vars + globals.
+
+- TODO: i think i should make a CallExpression object, instead of an
+   assignment(reg, call(params)) and handle exprs+return regs. later
+- TODO: remark all default params from the .hpp in the .cpp files.
+- TODO: review all "" and NULL ... change to something sensible ... like throw
+   exception
+- TODO; change most 'return false'  to throw exception.
+- TODO: 'xyz_type' and 'switch'  should not be used. ... everything should be
+	solved virtually.
+- TODO: check if it is better to return const& than return value?
+
+- TODO:
+    * make Register, Location, StringLiteral subclass of Variable
+    * change char register to type Location
+	* change BoolArray, reg2addr_map  to VariableSet, Variable2addr_map
+	   Instruction::Uses(Variable var)  returns true if ins uses var.
+	      ( etc. also for Defines, etc.  )
+- change static_cast's  to dynamic_cast's
+
+- shared_from_this
+   * only on the leaf nodes of the class hierarchy.
+   * not in destructor/constructor
+   * base classes need to be abstract
+
+- get rid of Frontend::Get construction
+- what is the 'erasepool' good for?
+
+- need some kind of way to note that a change to AL, also changes AX, and EAX.
+   but not AH.
+
+- Instruction::Return  should not fix the return register.
+   ... it should be derived from du-analysis of entir func.
+
+- investigate o_mem decoding in IdaArm
+- arm: add Rx, BP, #imm  should be reference to stackver.
+- arm: sub Rx, BP, #imm  should be reference to stackver.
+- seemingly unused procedure params now get deleted, 
+- seemingly unused array members now get deleted.
+- in several cases the condition code is not checked.
+- add support for structs.
+
+FIXED:
+- arm: add Rx, SP, #imm   now translates to reference to stackvar.
+- array index is now calculated properly for stackvars.

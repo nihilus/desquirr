@@ -1,0 +1,19 @@
+SOURCES = analysis.hpp codegen.cpp codegen.hpp dataflow.cpp dataflow.hpp \
+	desquirr.cpp desquirr.hpp expression.cpp expression.hpp \
+	function.cpp function.hpp instruction.cpp instruction.hpp node.cpp node.hpp \
+	usedefine.cpp usedefine.hpp x86.hpp analysis.hpp codegen.cpp codegen.hpp \
+	dataflow.cpp dataflow.hpp desquirr.cpp desquirr.hpp \
+	expression.cpp expression.hpp function.cpp function.hpp \
+	instruction.cpp instruction.hpp node.cpp node.hpp \
+	usedefine.cpp usedefine.hpp x86.hpp
+
+all: cvs dox
+
+cvs:
+	cvs update
+
+dox: Doxyfile $(SOURCES)
+	doxygen
+	touch dox
+
+

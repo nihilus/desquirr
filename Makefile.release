@@ -1,0 +1,9 @@
+
+DATE = $(shell date +%Y%m%d)
+DIR = desquirr
+ZIP = desquirr-src-$(DATE).zip
+
+all:
+	cd .. && zip -r -9 $(ZIP) $(DIR) -x $(DIR)'/CVS/*' $(DIR)'/bor.w32/CVS/*' $(DIR)/bor.w32/.cvsignore $(DIR)'/html/*' $(DIR)'/latex/*' $(DIR)/.cvsignore $(DIR)/Makefile.release $(DIR)/dox
+	cp ../$(ZIP) /usr/local/www/htdocs/magister/
+

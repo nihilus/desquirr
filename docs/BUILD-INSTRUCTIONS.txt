@@ -1,0 +1,31 @@
+Build instructions for desquirr
+
+PREREQUISITES:
+    * expects IDA to be installed in c:\local\ida500
+    * expects the http://www.boost.org library to be installed in c:\local\boost\boost_1_33_0
+    * the http://www.cygwin.com tools are installed
+    * the microsoft compiler.
+
+I have not tried building desquirr with the watcom or borland compilers
+
+PATCH SDK
+    * in the IDASDK, in 'include/intel.hpp', change the line
+       line: #include "../idaidp.hpp"
+       into: #include "idaidp.hpp"
+
+BUILDING:
+
+with makefile.gnu
+    * run 'vcvars32.bat'  to setup the environment variables for the msvc compiler
+    * run 'make -f makefile.gnu'   to build the plugin
+    * run 'make -f makefile.gnu install'  to install the plugin in the ida plugins directory.
+
+with visualstudio
+    * load desquirr.sln in visualstudio 2003
+    * build solution
+
+TROUBLESHOOTING:
+    * link gives an error message:  LINK: extra operand `/export:PLUGIN'
+      -> this means you did not run the vcvars32.bat file, and the gnu link was found
+         instead of microsoft's link
+
