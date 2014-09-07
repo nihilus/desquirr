@@ -50,7 +50,7 @@
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Hex-Rays.IDA.Pro.Advanced.v6.1\idasdk61\include;$(IncludePath)</IncludePath>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Hex-Rays.IDA.Pro.Advanced.v6.1\idasdk61\lib\x86_win_vc_32;$(LibraryPath)</LibraryPath>
     <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Hex-Rays.IDA.Pro.Advanced.v6.5\idasdk\include;$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Hex-Rays.IDA.Pro.Advanced.v6.6\idasdk\lib\x86_win_vc_32;$(LibraryPath)</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Hex-Rays.IDA.Pro.Advanced.v6.5\idasdk\lib\x86_win_vc_32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
